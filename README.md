@@ -28,8 +28,32 @@ To formulate a C program to convert a decimal number into its binary equivalent 
 ### Step 8: 
    Stop
 # Program:
-<img width="976" height="764" alt="image" src="https://github.com/user-attachments/assets/a1fd6272-772e-4620-a962-9e754260b65b" />
+```
+#include <stdio.h>
 
+int main() {
+    int num, rem, binary[32], i = 0, k;
+
+    printf("Enter a decimal number: ");
+    scanf("%d", &num);
+
+    int temp = num;  
+    while (num > 0) {
+        rem = num % 2;
+        binary[i] = rem;
+        i++;
+        num = num / 2;
+    }
+
+    printf("Binary equivalent of %d is: ", temp);
+    for (k = i - 1; k >= 0; k--) {
+        printf("%d", binary[k]);
+    }
+
+    printf("\n");
+    return 0;
+}
+```
 # Output:
 <img width="1005" height="271" alt="image" src="https://github.com/user-attachments/assets/76c0f51e-063c-4d4f-882f-f1fd060bc078" />
 
@@ -71,8 +95,84 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 9: 
   Stop
 # Program:
-<img width="978" height="760" alt="image" src="https://github.com/user-attachments/assets/9b175503-9aa3-4071-85e9-4cd25ab9997b" />
-<img width="987" height="781" alt="image" src="https://github.com/user-attachments/assets/15d4dc7c-0395-4605-be49-d017f7a1f16c" />
+```
+#include <stdio.h>
+
+int main() {
+    int i, j, k, m;
+    int pos[2][2];
+    int min, max;
+    
+    printf("Enter the order of the square matrix: ");
+    scanf("%d", &m);
+
+    int a[m][m];
+
+    
+    printf("Enter the elements of the matrix:\n");
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < m; j++) {
+            scanf("%d", &a[i][j]);
+        }
+    }
+
+  
+    printf("\nMatrix:\n");
+    for (i = 0; i < m; i++) {
+        for (j = 0; j < m; j++) {
+            printf("%d ", a[i][j]);
+        }
+        printf("\n");
+    }
+
+    int found = 0;
+
+    
+    for (i = 0; i < m; i++) {
+
+        min = a[i][0];
+        pos[0][0] = i;
+        pos[0][1] = 0;
+
+        
+        for (j = 1; j < m; j++) {
+            if (a[i][j] < min) {
+                min = a[i][j];
+                pos[0][0] = i;
+                pos[0][1] = j;
+            }
+        }
+
+     
+        j = pos[0][1];
+        max = a[0][j];
+        pos[1][0] = 0;
+        pos[1][1] = j;
+
+        for (k = 1; k < m; k++) {
+            if (a[k][j] > max) {
+                max = a[k][j];
+                pos[1][0] = k;
+                pos[1][1] = j;
+            }
+        }
+
+        
+        if (min == max && pos[0][0] == pos[1][0] && pos[0][1] == pos[1][1]) {
+            printf("\nSaddle point found: %d at position (%d, %d)\n",
+                   min, pos[0][0], pos[0][1]);
+            found = 1;
+            break;
+        }
+    }
+
+    if (!found) {
+        printf("\nNo saddle point exists in the matrix.\n");
+    }
+
+    return 0;
+}
+```
 
 # Output:
 <img width="1023" height="417" alt="image" src="https://github.com/user-attachments/assets/4359e7c3-1403-4921-abff-d687999e5820" />
@@ -110,8 +210,31 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 10: 
   Stop
 # Program:
-<img width="990" height="698" alt="image" src="https://github.com/user-attachments/assets/2db15a8a-7ded-47a0-ab78-281ac7036f5d" />
+```
+#include <stdio.h>
 
+int main() {
+    char s[100], d[100];
+    int i, j, len = 0;
+
+    printf("Enter a string: ");
+    scanf("%[^\n]s", s);
+
+    while (s[len] != '\0') {
+        len++;
+    }
+
+    j = 0;
+    for (i = len - 1; i >= 0; i--) {
+        d[j] = s[i];
+        j++;
+    }
+    d[j] = '\0';  
+    printf("Reversed string: %s", d);
+
+    return 0;
+}
+```
 # Output:
 <img width="1030" height="237" alt="image" src="https://github.com/user-attachments/assets/8558d450-49ab-42ef-9d74-53eabb360897" />
 
@@ -148,8 +271,40 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8:
   Stop
 # Program:
-<img width="960" height="714" alt="image" src="https://github.com/user-attachments/assets/59831aeb-ed44-461d-a531-76d8c884ad81" />
+```
+#include <stdio.h>
+#include <string.h>
 
+int main() {
+    char s[100];
+    int visited[256] = {0};
+    int i, j, n, count;
+
+    printf("Enter a string: ");
+    scanf("%[^\n]", s);
+
+    n = strlen(s);
+
+    printf("\nCharacter Frequency:\n");
+
+    for (i = 0; i < n; i++) {
+        if (visited[(unsigned char)s[i]] == 0) {
+            count = 0;
+
+            for (j = 0; j < n; j++) {
+                if (s[i] == s[j]) {
+                    count++;
+                }
+            }
+
+            printf("%c : %d\n", s[i], count);
+            visited[(unsigned char)s[i]] = 1;
+        }
+    }
+
+    return 0;
+}
+```
 # Output:
 <img width="900" height="443" alt="image" src="https://github.com/user-attachments/assets/dfb95b7e-75f7-47e5-94f4-b47127f535a9" />
 
@@ -186,9 +341,50 @@ Thus, the program was implemented and executed successfully, and the required ou
 ### Step 8: 
   Stop
 # Program:
-<img width="976" height="753" alt="image" src="https://github.com/user-attachments/assets/df55ed8a-75d2-48c6-a6c0-a06e9a33de17" />
-<img width="992" height="568" alt="image" src="https://github.com/user-attachments/assets/3035e17a-fd8e-4531-b3ef-f3b7910d04b4" />
+```
+#include <stdio.h>
+#include <string.h>
 
+int main() {
+    char str[200], words[50][50];
+    int i, j, k = 0, row = 0;
+
+    printf("Enter a string: ");
+    scanf("%[^\n]s", str);
+
+    for (i = 0; str[i] != '\0'; i++) {
+        if (str[i] != ' ') {
+            words[row][k++] = str[i];
+        } else {
+            words[row][k] = '\0';
+            row++;
+            k = 0;
+        }
+    }
+    words[row][k] = '\0'; 
+    row++;
+
+    for (i = 0; i < row; i++) {
+        if (words[i][0] == '\0')
+            continue;
+
+        for (j = i + 1; j < row; j++) {
+            if (strcmp(words[i], words[j]) == 0) {
+                words[j][0] = '\0'; 
+            }
+        }
+    }
+
+    printf("\nString after removing duplicate words:\n");
+    for (i = 0; i < row; i++) {
+        if (words[i][0] != '\0') {
+            printf("%s ", words[i]);
+        }
+    }
+
+    return 0;
+}
+```
 # Output:
 <img width="1034" height="247" alt="image" src="https://github.com/user-attachments/assets/99bb9d64-6c1b-443d-9ade-7bff4e45feea" />
 
